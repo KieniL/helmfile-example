@@ -1,11 +1,23 @@
 repositories:
- - name: prometheus-community
-   url: https://prometheus-community.github.io/helm-charts
+  - name: prometheus-community
+    url: https://prometheus-community.github.io/helm-charts
+  - name: hashicorp
+    url: https://helm.releases.hashicorp.com
 
 releases:
-- name: prom-norbac-ubuntu
-  namespace: prometheus
-  chart: prometheus-community/prometheus
-  set:
-  - name: rbac.create
-    value: false
+  - name: prom-norbac-ubuntu
+    namespace: prometheus
+    chart: prometheus-community/prometheus
+    set:
+      - name: rbac.create
+        value: false
+  - name: vault
+    namespace: vault
+    chart: hashicorp/vault
+    set:
+      - name: ui.enabled
+        value: true
+      - name: ui.serviceType
+        value: NodePort
+      - name: ui.serviceNodePort
+        value: 30001
